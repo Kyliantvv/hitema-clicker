@@ -2,7 +2,7 @@
   min-height: 100vh;
 }
 
-/* ========== LOGIN SCREEN ========== */
+/* ========== ECRAN DE CONNEXION ========== */
 
 .login-screen {
   min-height: 100vh;
@@ -219,7 +219,7 @@
   color: var(--text-muted);
 }
 
-/* ========== BACKGROUND ========== */
+/* ========== FOND ========== */
 
 .background-pattern {
   position: fixed;
@@ -231,7 +231,7 @@
   z-index: 0;
 }
 
-/* ========== HEADER ========== */
+/* ========== EN-TETE ========== */
 
 .header {
   position: relative;
@@ -330,7 +330,7 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* ========== GAME LAYOUT ========== */
+/* ========== DISPOSITION DU JEU ========== */
 
 .game-container {
   position: relative;
@@ -405,7 +405,7 @@
   margin-top: 1px;
 }
 
-/* ========== COOKIE BUTTON ========== */
+/* ========== BOUTON COOKIE ========== */
 
 .cookie-area {
   position: relative;
@@ -470,7 +470,7 @@
   white-space: nowrap;
 }
 
-/* ========== PARTICLES ========== */
+/* ========== PARTICULES ========== */
 
 .particle-container {
   position: absolute;
@@ -494,7 +494,7 @@
   100% { opacity: 0; transform: translateY(-70px) scale(0.8); }
 }
 
-/* ========== RIGHT PANEL ========== */
+/* ========== PANNEAU DROIT ========== */
 
 .right-panel {
   display: flex;
@@ -503,7 +503,7 @@
   overflow: hidden;
 }
 
-/* ========== TABS ========== */
+/* ========== ONGLETS ========== */
 
 .tab-bar {
   display: flex;
@@ -574,7 +574,7 @@
   padding: 12px;
 }
 
-/* ========== UPGRADE CARDS ========== */
+/* ========== CARTES AMELIORATIONS ========== */
 
 .upgrade-list {
   display: flex;
@@ -683,7 +683,7 @@
   font-weight: 600;
 }
 
-/* ========== MULTIPLIER CARDS ========== */
+/* ========== CARTES MULTIPLICATEURS ========== */
 
 .multiplier-list {
   display: flex;
@@ -783,7 +783,7 @@
   color: var(--green);
 }
 
-/* ========== ACHIEVEMENTS ========== */
+/* ========== SUCCES ========== */
 
 .achievements-grid {
   display: flex;
@@ -849,7 +849,7 @@
   font-weight: 800;
 }
 
-/* Achievement popup */
+/* Popup de succes */
 .achievement-popup {
   position: fixed;
   top: 68px;
@@ -894,7 +894,7 @@
   to { opacity: 0; transform: translateX(30px); }
 }
 
-/* ========== LEADERBOARD ========== */
+/* ========== CLASSEMENT ========== */
 
 .leaderboard-list {
   display: flex;
@@ -982,7 +982,7 @@
   text-transform: uppercase;
 }
 
-/* ========== ADMIN PANEL ========== */
+/* ========== PANNEAU ADMIN ========== */
 
 .admin-panel {
   display: flex;
@@ -1101,7 +1101,7 @@
   margin-top: 1px;
 }
 
-/* ========== PRESTIGE PANEL ========== */
+/* ========== PANNEAU PRESTIGE ========== */
 
 .prestige-panel {
   display: flex;
@@ -1217,7 +1217,7 @@
   cursor: not-allowed;
 }
 
-/* ========== FEEDBACK TOAST ========== */
+/* ========== NOTIFICATION TOAST ========== */
 
 .feedback-toast {
   position: fixed;
@@ -1280,7 +1280,7 @@
   to { opacity: 0; transform: translateX(-50%) translateY(-8px); }
 }
 
-/* ========== GOLDEN COOKIE ========== */
+/* ========== COOKIE DORE ========== */
 
 .golden-cookie {
   position: fixed;
@@ -1302,7 +1302,7 @@
   50% { transform: translateY(-8px); }
 }
 
-/* Golden Bonus Indicator */
+/* Indicateur de bonus dore */
 .golden-bonus-indicator {
   position: fixed;
   top: 62px;
@@ -1344,7 +1344,7 @@
   to { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
-/* ========== SECTION HEADERS ========== */
+/* ========== TITRES DE SECTION ========== */
 
 .section-header {
   font-size: 0.68rem;
@@ -1356,7 +1356,7 @@
   padding-left: 2px;
 }
 
-/* ========== EMPTY STATE ========== */
+/* ========== ETAT VIDE ========== */
 
 .empty-state {
   text-align: center;
@@ -1375,7 +1375,7 @@
   line-height: 1.5;
 }
 
-/* ========== RESPONSIVE ========== */
+/* ========== RESPONSIF ========== */
 
 @media (max-width: 900px) {
   .game-container {

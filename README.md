@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# Hitema Clicker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Projet React realise dans le cadre de notre cursus en Master a H3 Hitema. C'est un jeu de type "cookie clicker" mais version Hitema, ou le but c'est de produire un max de cookies en cliquant et en achetant des ameliorations.
 
-## Available Scripts
+## Le concept
 
-In the project directory, you can run:
+En gros c'est simple : tu cliques sur le logo Hitema pour generer des cookies, et avec ces cookies tu achetes des batiments et des multiplicateurs qui produisent des cookies automatiquement. Plus t'en as, plus ca va vite, classique.
 
-### `npm start`
+## Les features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Systeme de clic** : tu cliques, tu gagnes des cookies, c'est la base
+- **Batiments de production** : Alternance, Delta Boost, Braguier Boost, Mine, Usine, Banque, Temple, Tour de Sorcier... chaque batiment produit des cookies/seconde
+- **Multiplicateurs** : des boosts achetables avec plusieurs niveaux pour augmenter la prod
+- **Systeme d'utilisateurs** : chaque joueur a sa propre sauvegarde en local
+- **Roles** : tu peux etre Joueur ou Admin (l'admin peut modifier les scores des autres)
+- **Classement** : leaderboard entre les joueurs pour voir qui farm le plus
+- **Succes** : des achievements a debloquer en jouant
+- **Golden cookie** : un cookie dore apparait de temps en temps et donne des bonus temporaires
+- **Sauvegarde auto** : tout est sauvegarde dans le localStorage, pas besoin de serveur
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Stack technique
 
-### `npm test`
+- **React** (create-react-app)
+- **JavaScript** (pas de TypeScript, on reste simple)
+- Hooks utilises : `useState`, `useEffect`, `useCallback`
+- `React.memo` pour optimiser les re-renders
+- `localStorage` pour la persistence des donnees
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Comment lancer le projet
 
-### `npm run build`
+```bash
+# Installer les dependances
+npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Lancer en mode dev
+npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Le jeu tourne sur [http://localhost:3000](http://localhost:3000).
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Structure du projet
 
-### `npm run eject`
+```
+src/
+  App.js              # Composant principal avec toute la logique du jeu
+  App.css             # Styles de l'app
+  index.js            # Point d'entree
+  index.css           # Variables CSS et styles globaux
+  hitema.png          # Logo Hitema (bouton principal)
+  components/
+    LoginScreen.js    # Ecran de connexion
+    Header.js         # Barre du haut avec infos joueur
+    CookieButton.js   # Le bouton sur lequel on clique
+    Stats.js          # Affichage des stats (cookies/s, clics, etc.)
+    UpgradeList.js    # Liste des batiments achetables
+    MultiplierShop.js # Boutique des multiplicateurs
+    Achievements.js   # Liste des succes
+    Leaderboard.js    # Classement des joueurs
+    AdminPanel.js     # Panel admin pour gerer les scores
+    FeedbackMessage.js # Toasts de notification
+    ParticleManager.js # Particules quand on clique
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Comment ca marche techniquement
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Les cookies s'incrementent chaque seconde via un `setInterval` dans un `useEffect`
+- Le cout des batiments augmente de x1.15 a chaque achat (formule : `baseCost * 1.15^count`)
+- Les multiplicateurs ont un cout qui scale en x2.5 par niveau
+- La sauvegarde se fait avec un debounce de 500ms pour pas spam le localStorage
+- Chaque joueur a sa propre cle dans le localStorage (`cookieClicker_<username>`)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Auteur
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Projet realise par un etudiant en Master a H3 Hitema.

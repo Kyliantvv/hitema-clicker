@@ -12,7 +12,7 @@ import ParticleManager from './components/ParticleManager';
 import Header from './components/Header';
 import './App.css';
 
-// --- Constants ---
+// --- Constantes ---
 
 const INITIAL_UPGRADES = [
   { id: 'cursor', name: 'Alternance', description: 'Clique automatiquement de temps en temps.', baseCost: 15, bonus: 0.1, count: 0, icon: '👆' },
@@ -57,7 +57,7 @@ const ACHIEVEMENTS = [
   { id: 'building_100', name: 'Architecte suprême', description: 'Acheter 100 bâtiments', icon: '🏛️', type: 'buildings', target: 100 },
 ];
 
-// --- Save/Load helpers ---
+// --- Fonctions de sauvegarde/chargement ---
 
 function saveKey(username) {
   return `cookieClicker_${username}`;
@@ -96,11 +96,11 @@ function getAllUsers() {
   return users;
 }
 
-// --- App ---
+// --- Application principale ---
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
-  const [role, setRole] = useState('player'); // 'player' | 'admin'
+  const [role, setRole] = useState('player'); // 'player' ou 'admin'
 
   if (!currentUser) {
     return (
@@ -150,7 +150,7 @@ function Game({ username, role, onLogout, onSwitchRole }) {
   const effectiveProduction = productionAuto * multiplicateur * (1 + prestigeBonus * 0.1);
   const totalBuildings = ameliorations.reduce((sum, a) => sum + a.count, 0);
 
-  // --- Achievement checker ---
+  // --- Verification des succes ---
   const checkAchievements = useCallback((state) => {
     const { totalCookies: tc, clickCount: cc, cps, prestigeCount: pc, buildings } = state;
     const newUnlocks = [];
@@ -190,7 +190,7 @@ function Game({ username, role, onLogout, onSwitchRole }) {
     }
   }, [totalCookies, clickCount, effectiveProduction, prestigeCount, totalBuildings, unlockedAchievements, checkAchievements]);
 
-  // --- Golden bonus countdown ---
+  // --- Compte a rebours du bonus dore ---
   useEffect(() => {
     if (!goldenBonus.active) { setGoldenTimeLeft(0); return; }
     const interval = setInterval(() => {
@@ -205,7 +205,7 @@ function Game({ username, role, onLogout, onSwitchRole }) {
     return () => clearInterval(interval);
   }, [goldenBonus]);
 
-  // --- Auto-production tick ---
+  // --- Tick de production automatique ---
   useEffect(() => {
     if (effectiveProduction <= 0) return;
     const interval = setInterval(() => {
@@ -217,7 +217,7 @@ function Game({ username, role, onLogout, onSwitchRole }) {
     return () => clearInterval(interval);
   }, [effectiveProduction, goldenBonus]);
 
-  // --- Save game (per-user) ---
+  // --- Sauvegarde du jeu (par utilisateur) ---
   useEffect(() => {
     const timeout = setTimeout(() => {
       const saveData = {
@@ -227,7 +227,7 @@ function Game({ username, role, onLogout, onSwitchRole }) {
       };
       localStorage.setItem(saveKey(username), JSON.stringify(saveData));
 
-      // Update leaderboard
+      // Mise a jour du classement
       const board = loadLeaderboard();
       board[username] = {
         totalCookies, cookies,
@@ -242,7 +242,7 @@ function Game({ username, role, onLogout, onSwitchRole }) {
     return () => clearTimeout(timeout);
   }, [cookies, totalCookies, productionAuto, multiplicateur, ameliorations, multipliers, prestigeCount, prestigeBonus, clickCount, unlockedAchievements, username, effectiveProduction, totalBuildings]);
 
-  // --- Golden cookie spawner ---
+  // --- Apparition du cookie dore ---
   useEffect(() => {
     const delay = 45000 + Math.random() * 120000;
     const timer = setTimeout(() => {
@@ -262,7 +262,7 @@ function Game({ username, role, onLogout, onSwitchRole }) {
 
   const clearFeedback = useCallback(() => setFeedback(null), []);
 
-  // --- Click ---
+  // --- Gestion du clic ---
   const handleCookieClick = useCallback((e) => {
     const goldenMultiplier = goldenBonus.active && goldenBonus.type === 'click' ? 777 : 1;
     const amount = multiplicateur * (1 + prestigeBonus * 0.1) * goldenMultiplier;
@@ -277,7 +277,7 @@ function Game({ username, role, onLogout, onSwitchRole }) {
     setTimeout(() => setParticles(prev => prev.filter(p => p.id !== newParticle.id)), 1000);
   }, [multiplicateur, prestigeBonus, goldenBonus]);
 
-  // --- Golden click ---
+  // --- Clic sur le cookie dore ---
   const handleGoldenClick = useCallback(() => {
     setGoldenCookie(null);
     const roll = Math.random();
@@ -295,7 +295,7 @@ function Game({ username, role, onLogout, onSwitchRole }) {
     }
   }, [productionAuto, multiplicateur, showFeedback]);
 
-  // --- Buy building ---
+  // --- Achat d'un batiment ---
   const acheterAmelioration = useCallback((id) => {
     const upgrade = ameliorations.find(a => a.id === id);
     if (!upgrade) return;
@@ -307,7 +307,7 @@ function Game({ username, role, onLogout, onSwitchRole }) {
     showFeedback(`${upgrade.icon} ${upgrade.name} acheté !`);
   }, [cookies, ameliorations, showFeedback]);
 
-  // --- Buy multiplier (repeatable with scaling cost) ---
+  // --- Achat d'un multiplicateur (repeatable avec cout progressif) ---
   const acheterMultiplicateur = useCallback((id) => {
     const multi = multipliers.find(m => m.id === id);
     if (!multi || multi.level >= multi.maxLevel) return;
@@ -319,7 +319,7 @@ function Game({ username, role, onLogout, onSwitchRole }) {
     showFeedback(`${multi.icon} ${multi.name} niveau ${multi.level + 1} !`);
   }, [cookies, multipliers, showFeedback]);
 
-  // --- Prestige ---
+  // --- Systeme de prestige ---
   const canPrestige = totalCookies >= 1000000;
   const prestigeChips = Math.floor(Math.pow(totalCookies / 1e6, 0.5));
 
@@ -333,7 +333,7 @@ function Game({ username, role, onLogout, onSwitchRole }) {
     showFeedback(`Prestige ! +${chips} jetons de prestige !`, 'prestige');
   }, [canPrestige, prestigeChips, showFeedback]);
 
-  // --- Reset ---
+  // --- Reinitialisation de la partie ---
   const resetGame = useCallback(() => {
     localStorage.removeItem(saveKey(username));
     setCookies(0); setTotalCookies(0); setProductionAuto(0); setMultiplicateur(1);
@@ -348,7 +348,7 @@ function Game({ username, role, onLogout, onSwitchRole }) {
     showFeedback('Partie réinitialisée !', 'info');
   }, [username, showFeedback]);
 
-  // --- Admin actions ---
+  // --- Actions admin ---
   const adminResetPlayer = useCallback((playerName) => {
     localStorage.removeItem(saveKey(playerName));
     const board = loadLeaderboard();
