@@ -1,6 +1,6 @@
 # Hitema Clicker
 
-Projet React realise dans le cadre de notre cursus en Master a H3 Hitema. C'est un jeu de type "cookie clicker" mais version Hitema, ou le but c'est de produire un max de cookies en cliquant et en achetant des ameliorations.
+Projet React realise dans le cadre de notre cursus a H3 Hitema. C'est un jeu de type "cookie clicker" mais version Hitema, ou le but c'est de produire un max de cookies en cliquant et en achetant des ameliorations.
 
 ## Le concept
 
